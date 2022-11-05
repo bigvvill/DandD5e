@@ -1,2 +1,4 @@
-﻿GetUserInput userInput = new GetUserInput();
-userInput.MainMenu();
+﻿using DandD5e;
+
+ApiController apiController = new ApiController();
+apiController.GetManifest();
