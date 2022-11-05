@@ -11,26 +11,26 @@ namespace DandD5e
 {
     internal class ApiController
     {
-        public List<Race> GetRaces()
+        public List<Topic> GetTopics(string? topic)
         {
-            var client = new RestClient("https://api.open5e.com/races");
+            var client = new RestClient($"https://api.open5e.com/{topic}");
             var request = new RestRequest("?format=json");
             var response = client.ExecuteAsync(request);
 
-            List<Race> races = new List<Race>();
+            List<Topic> topics = new List<Topic>();
 
             if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 string rawResponse = response.Result.Content;
-                var serialize = JsonConvert.DeserializeObject<Races>(rawResponse);
+                var serialize = JsonConvert.DeserializeObject<Topics>(rawResponse);
 
-                races = serialize.RacesList;
+                topics = serialize.TopicsList;
 
-                TableFormat.ShowTable(races, "Race Menu");
-                return races;
+                TableFormat.ShowTable(topics, $"{char.ToUpper(topic[0]) + topic.Substring(1)} Menu");
+                return topics;
             }
 
-            return races;
+            return topics;
         }
 
         public List<Manifest> GetManifest()
@@ -39,20 +39,21 @@ namespace DandD5e
             var request = new RestRequest("?format=json");
             var response = client.ExecuteAsync(request);
 
-            List<Manifest> manifestlist = new List<Manifest>();
+            List<Manifest> manifestList = new List<Manifest>();
 
             if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 string rawResponse = response.Result.Content;
                 var serialize = JsonConvert.DeserializeObject<Manifests>(rawResponse);
                 
-                manifestlist = serialize.ManifestList;  
+                
+                manifestList = serialize.ManifestList.GroupBy(x => x.type).Select(x => x.First()).ToList();  
 
-                TableFormat.ShowTable(manifestlist, "Manifest");
-                return manifestlist;
+                TableFormat.ShowTable(manifestList, "D&D 5e Reference");
+                return manifestList;
             }
 
-            return manifestlist;
+            return manifestList;
         }
     }
 }

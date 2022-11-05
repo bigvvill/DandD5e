@@ -23,7 +23,7 @@ namespace DandD5e
                 .WithColumn(tableName)
                 .WithFormat(ConsoleTableBuilderFormat.Alternative)
                 .ExportAndWriteLine(TableAligntment.Center);
-            Console.WriteLine("\n");
+            //Console.WriteLine("\n");
         }
     }
 }

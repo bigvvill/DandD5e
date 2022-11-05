@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace DandD5e.Models
 {
-    public class Race
+    public class Topic
     {
         public string name { get; set; }
 
     }
 
-    public class Races
+    public class Topics
     {
         [JsonProperty("results")]
 
-        public List<Race> RacesList { get; set; }
+        public List<Topic> TopicsList { get; set; }
     }
 }
