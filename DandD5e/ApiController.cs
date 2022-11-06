@@ -11,7 +11,7 @@ namespace DandD5e
 {
     internal class ApiController
     {
-        public List<Topic> GetTopics(string? topic)
+        public void GetTopics(string? topic)
         {
             var client = new RestClient($"https://api.open5e.com/{topic}");
             var request = new RestRequest("?format=json");
@@ -26,40 +26,47 @@ namespace DandD5e
 
                 topics = serialize.TopicsList;
 
-                Console.WriteLine("D&D 5e Reference\n");
-
-                
-
-                TableFormat.ShowTable(topics, $"{char.ToUpper(topic[0]) + topic.Substring(1)} Menu");
-                return topics;
-            }
-
-            return topics;
-        }
-
-        public List<Manifest> GetManifest()
-        {
-            var client = new RestClient("https://api.open5e.com/manifest");
-            var request = new RestRequest("?format=json");
-            var response = client.ExecuteAsync(request);
-
-            List<Manifest> manifestList = new List<Manifest>();
-
-            if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
-            {
-                string rawResponse = response.Result.Content;
-                var serialize = JsonConvert.DeserializeObject<Manifests>(rawResponse);
-                
-                
-                manifestList = serialize.ManifestList.GroupBy(x => x.type).Select(x => x.First()).ToList();
-
                 Console.WriteLine("D&D 5e Reference\n");                
 
-                TableFormat.ShowTable(manifestList, "D&D 5e Reference");
-                return manifestList;
+                TableFormat.ShowTable(topics, $"{char.ToUpper(topic[0]) + topic.Substring(1)} Menu");
+
+                GetUserInput getUserInput = new GetUserInput();
+                getUserInput.GetTopicsInput(topic);
+               
             }
 
-            return manifestList;
+            
+        }
+
+        public void GetManifest()
+        {
+
+            Console.WriteLine("Welcome to the D&D 5e Character Helper!\n");
+            Console.WriteLine("This app provides information on Races and Classes you can choose for your new character.\n\n");
+            Console.WriteLine("Would you like to read about:");
+            Console.WriteLine("0 - Exit");
+            Console.WriteLine("1 - Races");
+            Console.WriteLine("2 - Classes");
+            Console.WriteLine("3 - Backgrounds");
+
+            string myTopic = Console.ReadLine();
+
+            switch (myTopic)
+            {
+                case "0":
+                    Console.WriteLine("Goodbye!");
+                    Environment.Exit(0);
+                    break;
+                case "1":
+                    GetTopics("races");
+                    break;
+                case "2":
+                    GetTopics("classes");
+                    break;
+                case "3":
+                    GetTopics("backgrounds");
+                    break;
+            }            
         }
 
         public void GetRace(string? topic, string? selection)
@@ -95,8 +102,7 @@ namespace DandD5e
                 Console.WriteLine();
                 Console.ReadLine();
 
-                GetUserInput getUserInput = new();
-                getUserInput.GetTopicsInput(topic);
+                GetTopics(topic);
             }
         }
 
