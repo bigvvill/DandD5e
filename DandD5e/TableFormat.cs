@@ -25,5 +25,19 @@ namespace DandD5e
                 .ExportAndWriteLine(TableAligntment.Center);
             //Console.WriteLine("\n");
         }
+
+        public static void ShowList(List<object> tableData, string tableName) 
+        {
+            Console.Clear();
+
+            if (tableName == null)
+                tableName = "";
+
+            ConsoleTableBuilder
+                .From(tableData)
+                .WithColumn(tableName)                
+                .ExportAndWriteLine();
+            //Console.WriteLine("\n");
+        }
     }
 }

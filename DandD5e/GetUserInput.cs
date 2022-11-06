@@ -15,15 +15,25 @@ namespace DandD5e
         {
             var manifestList = apiController.GetManifest();
 
-            Console.WriteLine("Select a topic:");
-            string topic = Console.ReadLine();
+            Console.WriteLine("\n\nSelect a topic:");
+            string manifest = Console.ReadLine();
 
-            GetTopicsInput(topic);
+            GetTopicsInput(manifest);
         }
 
         private void GetTopicsInput(string? topic)
         {
             var topics = apiController.GetTopics(topic);
+
+            Console.WriteLine("\n\nSelect a topic:");
+            string selection = Console.ReadLine();
+
+            apiController.GetDetail(topic, selection);
         }
+
+        //private void GetTopicDetails(string? topic, string? selection)
+        //{
+        //    apiController.GetDetail(topic, selection);
+        //}
     }
 }
