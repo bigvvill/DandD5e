@@ -62,7 +62,7 @@ namespace DandD5e
             return manifestList;
         }
 
-        public void GetDetail(string? topic, string? selection)
+        public void GetRace(string? topic, string? selection)
         {
             var client = new RestClient($"https://api.open5e.com/{topic}");
             var request = new RestRequest("?format=json");
@@ -89,14 +89,14 @@ namespace DandD5e
                         Console.WriteLine("\n" + currentTopic.size.ToString());
                         Console.WriteLine("\n" + currentTopic.languages.ToString());
                         Console.WriteLine("\n" + currentTopic.traits.ToString());
-
                     }
-
-
                 }
 
                 Console.WriteLine();
                 Console.ReadLine();
+
+                GetUserInput getUserInput = new();
+                getUserInput.GetTopicsInput(topic);
             }
         }
 

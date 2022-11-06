@@ -11,7 +11,7 @@ namespace DandD5e
     {
         ApiController apiController = new ApiController();
 
-        internal void GetManifestInput()
+        public void GetManifestInput()
         {
             var manifestList = apiController.GetManifest();
 
@@ -21,14 +21,14 @@ namespace DandD5e
             GetTopicsInput(manifest);
         }
 
-        private void GetTopicsInput(string? topic)
+        public void GetTopicsInput(string? topic)
         {
             var topics = apiController.GetTopics(topic);
 
             Console.WriteLine("\n\nSelect a topic:");
             string selection = Console.ReadLine();
 
-            apiController.GetDetail(topic, selection);
+            apiController.GetRace(topic, selection);
         }
 
         //private void GetTopicDetails(string? topic, string? selection)
