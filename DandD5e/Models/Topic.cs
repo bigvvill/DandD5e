@@ -10,7 +10,6 @@ namespace DandD5e.Models
     public class Topic
     {
         public string name { get; set; }
-
     }
 
     public class Topics

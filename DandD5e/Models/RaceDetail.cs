@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace DandD5e.Models
 {
-    internal class TopicDetail
-    {
-        public string name { get; set; }
+    internal class RaceDetail : Topic
+    {        
         public string desc { get; set; }
         public string asi_desc { get; set; }
         public string age { get; set; }
@@ -19,10 +18,10 @@ namespace DandD5e.Models
         public string traits { get; set; }
     }
 
-    internal class TopicDetails
+    internal class RaceDetails
     {
         [JsonProperty("results")]
 
-        public List<TopicDetail> TopicDetailList { get; set; }
+        public List<RaceDetail> RaceDetailList { get; set; }
     }
 }

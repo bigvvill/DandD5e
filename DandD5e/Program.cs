@@ -1,4 +1,4 @@
 ﻿using DandD5e;
 
-ApiController apiController = new ApiController();
-apiController.GetManifest();
+GetUserInput getUserInput = new GetUserInput();
+getUserInput.GetManifest();
